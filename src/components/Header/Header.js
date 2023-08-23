@@ -5,10 +5,13 @@ function Header() {
   return (
     <header className="header">
       <div className="header-wrapper">
-        <h1 className="header-wrapper__title">BankTechBoost</h1>
+        <Link>
+          <h1 className="header-wrapper__title">BankTechBoost</h1>
+        </Link>
+
         <nav className="header-nav">
-          <Link>About</Link>
-          <Link>HomePage</Link>
+          <Link to="/about">About</Link>
+          <Link to="/">HomePage</Link>
         </nav>
       </div>
     </header>
