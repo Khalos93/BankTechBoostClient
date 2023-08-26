@@ -6,7 +6,7 @@ function Header() {
     <header className="header">
       <div className="header-wrapper">
         <Link>
-          <h1 className="header-wrapper__title">BankTechBoost</h1>
+          <h1 className="header-wrapper__title">BankUncleBoost</h1>
         </Link>
 
         <nav className="header-nav">

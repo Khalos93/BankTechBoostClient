@@ -1,0 +1,50 @@
+.bond {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  height: 5rem;
+  margin: 1rem 0;
+
+  &__title {
+  }
+
+  &__status {
+  }
+
+  &__price {
+  }
+
+  .obligation--detail {
+    width: 4rem;
+    height: 3rem;
+  }
+}
+
+.button-wrapper {
+  width: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3rem;
+
+  .button {
+    width: 10rem;
+    height: 4rem;
+    border-radius: 20px;
+
+    &--link {
+      border: 1px solid;
+      padding-left: 8%;
+      padding-top: 3%;
+      width: 10rem;
+      height: 4rem;
+    }
+  }
+}
+
+.bond--selected {
+  background-color: aquamarine;
+}
+
+.bond--not-select {
+  background-color: white;
+}

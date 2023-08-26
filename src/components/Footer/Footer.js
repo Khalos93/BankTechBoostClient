@@ -5,7 +5,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-wrapper">
         <p className="footer__content">
-          Privacy Policy | Terms of Use © 2023 BankTechBoost. All rights
+          Privacy Policy | Terms of Use © 2023 BankUncleBoost. All rights
           reserved.
         </p>
       </div>
