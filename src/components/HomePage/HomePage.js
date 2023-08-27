@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import './HomePage.scss';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import NavBar from '../NavBar/NavBar';
+import Disclaimer from '../Disclaimer/Disclaimer';
 
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 const PORT = process.env.REACT_APP_PORT;
@@ -12,9 +14,6 @@ function HomePage() {
 
   const [firstChoice, setFirstChoice] = useState(null);
   const [secondChoice, setSecondChoice] = useState(null);
-
-  const [selected, setSelected] = useState('');
-  const [notSelect, setNotSelect] = useState('bond--not-select');
 
   useEffect(() => {
     axios
@@ -29,9 +28,6 @@ function HomePage() {
   }, []);
 
   function clickHandler(e) {
-    setSelected('bond--selected');
-    setNotSelect('');
-
     if (!firstChoice) {
       setFirstChoice(e.target.id);
     } else if (firstChoice && !secondChoice) {
@@ -47,9 +43,6 @@ function HomePage() {
     ) {
       setSecondChoice(null);
     }
-
-    console.log(firstChoice);
-    console.log(secondChoice);
   }
 
   if (isLoading) {
@@ -58,11 +51,13 @@ function HomePage() {
 
   return (
     <div className={`hero `}>
+      <NavBar />
+      <Disclaimer />
       {datas.map(bond => {
         return (
           <article
             key={bond.id}
-            className={`bond ${selected} ${notSelect}`}
+            className={`bond `}
             id={bond.id}
             onClick={e => {
               clickHandler(e);

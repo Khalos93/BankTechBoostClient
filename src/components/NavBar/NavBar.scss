@@ -1,0 +1,10 @@
+.navBar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #dad4ef;
+
+  &__item {
+    width: 10rem;
+    height: 3rem;
+  }
+}

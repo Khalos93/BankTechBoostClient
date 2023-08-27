@@ -5,7 +5,7 @@ function Header() {
   return (
     <header className="header">
       <div className="header-wrapper">
-        <Link>
+        <Link to="/">
           <h1 className="header-wrapper__title">BankUncleBoost</h1>
         </Link>
 

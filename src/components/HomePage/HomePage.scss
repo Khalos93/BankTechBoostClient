@@ -21,6 +21,7 @@
 }
 
 .button-wrapper {
+  display: flex;
   width: 25%;
   margin-left: auto;
   margin-right: auto;
@@ -33,10 +34,8 @@
 
     &--link {
       border: 1px solid;
-      padding-left: 8%;
+      padding-left: 7%;
       padding-top: 3%;
-      width: 10rem;
-      height: 4rem;
     }
   }
 }
