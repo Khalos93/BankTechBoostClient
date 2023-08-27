@@ -28,14 +28,18 @@ function HomePage({ firstChoice, secondChoice }) {
   }, []);
 
   function clickSelectHandler(e, bondId) {
-    if (!selecteFirstdArticle && !selectSecondArticle) {
-      setSelecteFirstdArticle(bondId);
-      firstChoice.current = e.target.id;
-      console.log(firstChoice.current);
-    } else if (selecteFirstdArticle && !selectSecondArticle) {
-      setSelectSecondArticle(bondId);
-      secondChoice.current = e.target.id;
-      console.log(secondChoice.current);
+    // if (!selecteFirstdArticle && !selectSecondArticle) {
+    //   setSelecteFirstdArticle(bondId);
+    // } else if (selecteFirstdArticle && !selectSecondArticle) {
+    //   setSelectSecondArticle(bondId);
+    // }
+
+    if (!firstChoice.current && !secondChoice.current) {
+      firstChoice.current = `${e.target.id}`;
+      console.log(firstChoice.current, secondChoice.current);
+    } else if (firstChoice.current && !secondChoice.current) {
+      secondChoice.current = `${e.target.id}`;
+      console.log(firstChoice.current, secondChoice.current);
     }
     // setSelecteFirstdArticle(bondId);
     // setSelectSecondArticle(bondId);
