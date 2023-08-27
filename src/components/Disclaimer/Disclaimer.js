@@ -80,9 +80,7 @@ function Disclaimer() {
       </section>
       <div>
         <Link>Leave</Link>
-        <button on onClick={closeHandler}>
-          Accept
-        </button>
+        <button onClick={closeHandler}>Accept</button>
       </div>
     </article>
   );

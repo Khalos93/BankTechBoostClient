@@ -8,12 +8,12 @@ import Disclaimer from '../Disclaimer/Disclaimer';
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 const PORT = process.env.REACT_APP_PORT;
 
-function HomePage() {
+function HomePage({ firstChoice, secondChoice }) {
   const [isLoading, setIsLoading] = useState(true);
   const [datas, setDatas] = useState(null);
 
-  const [firstChoice, setFirstChoice] = useState(null);
-  const [secondChoice, setSecondChoice] = useState(null);
+  const [selecteFirstdArticle, setSelecteFirstdArticle] = useState(null);
+  const [selectSecondArticle, setSelectSecondArticle] = useState(null);
 
   useEffect(() => {
     axios
@@ -27,22 +27,41 @@ function HomePage() {
       });
   }, []);
 
-  function clickHandler(e) {
-    if (!firstChoice) {
-      setFirstChoice(e.target.id);
-    } else if (firstChoice && !secondChoice) {
-      setSecondChoice(e.target.id);
-    } else if (firstChoice && secondChoice && e.target.id !== firstChoice) {
-      setSecondChoice(e.target.id);
-    } else if (firstChoice === e.target.id && secondChoice) {
-      setFirstChoice(null);
-    } else if (
-      firstChoice &&
-      firstChoice !== e.target.id &&
-      secondChoice === e.target.id
-    ) {
-      setSecondChoice(null);
+  function clickSelectHandler(e, bondId) {
+    if (!selecteFirstdArticle && !selectSecondArticle) {
+      setSelecteFirstdArticle(bondId);
+      firstChoice.current = e.target.id;
+      console.log(firstChoice.current);
+    } else if (selecteFirstdArticle && !selectSecondArticle) {
+      setSelectSecondArticle(bondId);
+      secondChoice.current = e.target.id;
+      console.log(secondChoice.current);
     }
+    // setSelecteFirstdArticle(bondId);
+    // setSelectSecondArticle(bondId);
+
+    // if (selecteFirstdArticle === bondId) {
+    //   setSelecteFirstdArticle(null);
+    // }
+
+    // if (selectSecondArticle === bondId) {
+    //   setSelectSecondArticle(null);
+    // }
+    // if (!firstChoice) {
+    //   setFirstChoice(e.target.id);
+    // } else if (firstChoice && !secondChoice) {
+    //   setSecondChoice(e.target.id);
+    // } else if (firstChoice && secondChoice && e.target.id !== firstChoice) {
+    //   setSecondChoice(e.target.id);
+    // } else if (firstChoice === e.target.id && secondChoice) {
+    //   setFirstChoice(null);
+    // } else if (
+    //   firstChoice &&
+    //   firstChoice !== e.target.id &&
+    //   secondChoice === e.target.id
+    // ) {
+    //   setSecondChoice(null);
+    // }
   }
 
   if (isLoading) {
@@ -57,10 +76,18 @@ function HomePage() {
         return (
           <article
             key={bond.id}
-            className={`bond `}
+            className={`bond ${
+              selecteFirstdArticle === bond.id
+                ? 'bond--selected'
+                : 'bond--not-selected'
+            } ${
+              selecteFirstdArticle && selectSecondArticle === bond.id
+                ? 'bond--second-selection'
+                : 'bond--not-selected'
+            }`}
             id={bond.id}
             onClick={e => {
-              clickHandler(e);
+              clickSelectHandler(e, bond.id);
             }}
           >
             <h3 className="bond__title obligation--detail">{bond.name}</h3>
@@ -80,7 +107,9 @@ function HomePage() {
       })}
       <div className="button-wrapper">
         <button className="button">cancel</button>
-        <Link className="button button--link">submit</Link>
+        <Link to={'/detail'} className="button button--link">
+          submit
+        </Link>
       </div>
     </div>
   );

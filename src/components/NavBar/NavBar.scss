@@ -2,9 +2,10 @@
   display: flex;
   justify-content: space-around;
   background-color: #dad4ef;
+  width: 80%;
 
   &__item {
-    width: 10rem;
+    width: 4rem;
     height: 3rem;
   }
 }
