@@ -8,9 +8,12 @@ import Disclaimer from '../Disclaimer/Disclaimer';
 const DOMAIN = process.env.REACT_APP_DOMAIN;
 const PORT = process.env.REACT_APP_PORT;
 
-function HomePage({ firstChoice, secondChoice }) {
+function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [datas, setDatas] = useState(null);
+
+  const [firstId, setFirstId] = useState(null);
+  const [secondId, setSecondId] = useState(null);
 
   const [selecteFirstdArticle, setSelecteFirstdArticle] = useState(null);
   const [selectSecondArticle, setSelectSecondArticle] = useState(null);
@@ -28,44 +31,28 @@ function HomePage({ firstChoice, secondChoice }) {
   }, []);
 
   function clickSelectHandler(e, bondId) {
-    // if (!selecteFirstdArticle && !selectSecondArticle) {
-    //   setSelecteFirstdArticle(bondId);
-    // } else if (selecteFirstdArticle && !selectSecondArticle) {
-    //   setSelectSecondArticle(bondId);
-    // }
-
-    if (!firstChoice.current && !secondChoice.current) {
-      firstChoice.current = `${e.target.id}`;
-      console.log(firstChoice.current, secondChoice.current);
-    } else if (firstChoice.current && !secondChoice.current) {
-      secondChoice.current = `${e.target.id}`;
-      console.log(firstChoice.current, secondChoice.current);
+    if (!firstId && !secondId) {
+      setFirstId(e.target.id);
+      setSelecteFirstdArticle(bondId);
+    } else if (firstId && !secondId & (firstId !== e.target.id)) {
+      setSecondId(e.target.id);
+      setSelectSecondArticle(bondId);
     }
-    // setSelecteFirstdArticle(bondId);
-    // setSelectSecondArticle(bondId);
-
-    // if (selecteFirstdArticle === bondId) {
+    // } else if (firstId === e.target.id && secondId) {
+    //   setFirstId(null);
     //   setSelecteFirstdArticle(null);
-    // }
-
-    // if (selectSecondArticle === bondId) {
+    // } else if (firstId && firstId !== e.target.id && secondId === e.target.id) {
+    //   setSecondId(null);
     //   setSelectSecondArticle(null);
     // }
-    // if (!firstChoice) {
-    //   setFirstChoice(e.target.id);
-    // } else if (firstChoice && !secondChoice) {
-    //   setSecondChoice(e.target.id);
-    // } else if (firstChoice && secondChoice && e.target.id !== firstChoice) {
-    //   setSecondChoice(e.target.id);
-    // } else if (firstChoice === e.target.id && secondChoice) {
-    //   setFirstChoice(null);
-    // } else if (
-    //   firstChoice &&
-    //   firstChoice !== e.target.id &&
-    //   secondChoice === e.target.id
-    // ) {
-    //   setSecondChoice(null);
-    // }
+  }
+
+  function resetState() {
+    setFirstId(null);
+    setSecondId(null);
+
+    setSelecteFirstdArticle(null);
+    setSelectSecondArticle(null);
   }
 
   if (isLoading) {
@@ -75,7 +62,7 @@ function HomePage({ firstChoice, secondChoice }) {
   return (
     <div className={`hero `}>
       <NavBar />
-      <Disclaimer />
+      {/* <Disclaimer /> */}
       {datas.map(bond => {
         return (
           <article
@@ -110,8 +97,13 @@ function HomePage({ firstChoice, secondChoice }) {
         );
       })}
       <div className="button-wrapper">
-        <button className="button">cancel</button>
-        <Link to={'/detail'} className="button button--link">
+        <button className="button" onClick={resetState}>
+          cancel
+        </button>
+        <Link
+          to={`/detail/${firstId}/${secondId}`}
+          className="button button--link"
+        >
           submit
         </Link>
       </div>
