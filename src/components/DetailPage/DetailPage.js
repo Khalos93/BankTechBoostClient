@@ -27,171 +27,56 @@ function DetailPage() {
   let firstBond;
   let secondBond;
 
-  // const bondsRequest = async () => {
-  //   try {
-  //     const firstResponse = await axios.get(
-  //       `${DOMAIN}${PORT}/detail/${firstId}`
-  //     );
-  //     console.log(firstResponse.data);
-  //     setFirstObg(firstResponse.data);
-  //     console.log(firstObg);
+  const bondsRequest = async () => {
+    try {
+      const firstResponse = await axios.get(
+        `${DOMAIN}${PORT}/detail/${firstId}`
+      );
 
-  //     const secondResponse = await axios.get(
-  //       `${DOMAIN}${PORT}/detail/${secondId}`
-  //     );
-  //     setSecondObg(secondResponse.data);
+      setFirstObg(firstResponse.data);
 
-  //     const spreadValue1 = firstObg.spreadValues;
+      const secondResponse = await axios.get(
+        `${DOMAIN}${PORT}/detail/${secondId}`
+      );
+      setSecondObg(secondResponse.data);
 
-  //     const spreadValue2 = secondObg.spreadValues;
+      const spreadValue1 = firstResponse.data.spreadValues;
 
-  //     const ratios = [];
+      const spreadValue2 = secondResponse.data.spreadValues;
 
-  //     for (let i = 0; i < spreadValue1.length; i++) {
-  //       const inputDate = spreadValue1[i].date;
-  //       const parsedDate = new Date(inputDate);
-  //       const formattedDate = parsedDate.toISOString().split('T')[0];
+      const ratios = [];
 
-  //       const ratio = {
-  //         date: formattedDate,
-  //         value: spreadValue1[i].value / spreadValue2[i].value
-  //       };
-  //       ratios.push(ratio);
+      for (let i = 0; i < spreadValue1.length; i++) {
+        const inputDate = spreadValue1[i].date;
+        const parsedDate = new Date(inputDate);
+        const formattedDate = parsedDate.toISOString().split('T')[0];
 
-  //       setData(ratios);
-  //     }
-  //     const avarage = ratios.reduce((a, b) => a + b.value, 0) / ratios.length;
+        const ratio = {
+          date: formattedDate,
+          value: spreadValue1[i].value / spreadValue2[i].value
+        };
+        ratios.push(ratio);
 
-  //     const sD = getStandardDeviation(ratios);
+        setData(ratios);
+      }
+      const avarage = ratios.reduce((a, b) => a + b.value, 0) / ratios.length;
 
-  //     const sDMax = avarage + 1.5 * sD;
-  //     setPositiveSD(sDMax);
+      const sD = getStandardDeviation(ratios);
 
-  //     const sDMin = avarage - 1.5 * sD;
-  //     setNegativeSD(sDMin);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+      const sDMax = avarage + 1.5 * sD;
+      setPositiveSD(sDMax);
 
-  // useEffect(() => {
-  //   bondsRequest();
-  //   if (data && positiveSD && negativeSD && firstObg && secondObg) {
-  //     setIsLoading(false);
-  //   }
-  // }, []);
+      const sDMin = avarage - 1.5 * sD;
+      setNegativeSD(sDMin);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    axios
-      .get(`${DOMAIN}${PORT}/detail/${firstId}`)
-      .then(res => {
-        firstBond = res.data;
-
-        setFirstObg(res.data.name);
-
-        axios
-          .get(`${DOMAIN}${PORT}/detail/${secondId}`)
-          .then(resp => {
-            secondBond = resp.data;
-
-            setSecondObg(resp.data.name);
-
-            const spreadValue1 = firstBond.spreadValues;
-
-            const spreadValue2 = secondBond.spreadValues;
-
-            const ratios = [];
-
-            for (let i = 0; i < spreadValue1.length; i++) {
-              const inputDate = spreadValue1[i].date;
-              const parsedDate = new Date(inputDate);
-              const formattedDate = parsedDate.toISOString().split('T')[0];
-
-              const ratio = {
-                date: formattedDate,
-                value: spreadValue1[i].value / spreadValue2[i].value
-              };
-              ratios.push(ratio);
-              console.log(ratios);
-              setData(ratios);
-            }
-            const avarage =
-              ratios.reduce((a, b) => a + b.value, 0) / ratios.length;
-
-            const sD = getStandardDeviation(ratios);
-
-            const sDMax = avarage + 1.5 * sD;
-            setPositiveSD(sDMax);
-
-            const sDMin = avarage - 1.5 * sD;
-            setNegativeSD(sDMin);
-
-            setIsLoading(false);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    bondsRequest();
+    setIsLoading(false);
   }, []);
-
-  // axios
-  //   .get(`${DOMAIN}${PORT}/detail/${firstId}`)
-  //   .then(res => {
-  //     firstBond = res.data;
-
-  //     setFirstObg(res.data.name);
-
-  //     axios
-  //       .get(`${DOMAIN}${PORT}/detail/${secondId}`)
-  //       .then(resp => {
-  //         secondBond = resp.data;
-
-  //         setSecondObg(resp.data.name);
-
-  //         const spreadValue1 = firstBond.spreadValues;
-
-  //         const spreadValue2 = secondBond.spreadValues;
-
-  //         const ratios = [];
-
-  //         for (let i = 0; i < spreadValue1.length; i++) {
-  //           const inputDate = spreadValue1[i].date;
-  //           const parsedDate = new Date(inputDate);
-  //           const formattedDate = parsedDate.toISOString().split('T')[0];
-
-  //           const ratio = {
-  //             date: formattedDate,
-  //             value: spreadValue1[i].value / spreadValue2[i].value
-  //           };
-  //           ratios.push(ratio);
-  //           console.log(ratios);
-  //           setData(ratios);
-  //         }
-  //         const avarage =
-  //           ratios.reduce((a, b) => a + b.value, 0) / ratios.length;
-
-  //         const sD = getStandardDeviation(ratios);
-
-  //         const sDMax = avarage + 1.5 * sD;
-  //         setPositiveSD(sDMax);
-
-  //         const sDMin = avarage - 1.5 * sD;
-  //         setNegativeSD(sDMin);
-
-  //         if (data && positiveSD && negativeSD) {
-  //           setIsLoading(false);
-  //         }
-  //       })
-  //       .catch(err => {
-  //         console.log(err);
-  //       });
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
 
   function getStandardDeviation(array) {
     const n = array.length;
@@ -208,24 +93,24 @@ function DetailPage() {
     return standardDeviation;
   }
 
-  if (isLoading) {
+  if (isLoading || !firstObg || !secondObg) {
     <div>is Loading...!</div>;
     return;
   }
 
   return (
     <div>
-      <h1>{`${firstObg} vs ${secondObg}`}</h1>
+      <h1>{`${firstObg.name} vs ${secondObg.name}`}</h1>
       <LineChart width={600} height={300} data={data}>
         <CartesianGrid stroke="#ccc" />
         <Line type="monotone" dataKey="value" stroke="#2196f3" />
         <ReferenceLine
-          x={positiveSD}
+          y={positiveSD}
           label="standard deviation + 1.5"
           stroke="#00FF00"
         />
         <ReferenceLine
-          x={negativeSD}
+          y={negativeSD}
           label="standard deviation - 1.5"
           stroke="#FF0000"
         />
