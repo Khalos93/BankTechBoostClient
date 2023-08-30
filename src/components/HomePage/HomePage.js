@@ -38,13 +38,6 @@ function HomePage() {
       setSecondId(e.target.id);
       setSelectSecondArticle(bondId);
     }
-    // } else if (firstId === e.target.id && secondId) {
-    //   setFirstId(null);
-    //   setSelecteFirstdArticle(null);
-    // } else if (firstId && firstId !== e.target.id && secondId === e.target.id) {
-    //   setSecondId(null);
-    //   setSelectSecondArticle(null);
-    // }
   }
 
   function resetState() {
@@ -62,7 +55,7 @@ function HomePage() {
   return (
     <div className={`hero `}>
       <NavBar />
-      {/* <Disclaimer /> */}
+      <Disclaimer />
       {datas.map(bond => {
         return (
           <article

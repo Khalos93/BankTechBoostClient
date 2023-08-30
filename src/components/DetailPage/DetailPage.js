@@ -24,9 +24,6 @@ function DetailPage() {
 
   const { firstId, secondId } = useParams();
 
-  let firstBond;
-  let secondBond;
-
   const bondsRequest = async () => {
     try {
       const firstResponse = await axios.get(
@@ -114,16 +111,7 @@ function DetailPage() {
           label="standard deviation - 1.5"
           stroke="#FF0000"
         />
-        {/* <ReferenceLine
-          x={2}
-          label="standard deviation + 1.5"
-          stroke="#00FF00"
-        />
-        <ReferenceLine
-          x={1}
-          label="standard deviation - 1.5"
-          stroke="#FF0000"
-        /> */}
+
         <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
