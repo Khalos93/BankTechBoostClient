@@ -52,18 +52,22 @@ function DetailPage() {
           date: formattedDate,
           value: spreadValue1[i].value / spreadValue2[i].value
         };
+
         ratios.push(ratio);
 
         setData(ratios);
       }
-      const avarage = ratios.reduce((a, b) => a + b.value, 0) / ratios.length;
+      const average = ratios.reduce((a, b) => a + b.value, 0) / ratios.length;
 
       const sD = getStandardDeviation(ratios);
+      console.log('sd is:' + sD);
 
-      const sDMax = avarage + 1.5 * sD;
+      const sDMax = average + 1.5 * sD;
+      console.log('sdMax is:' + sDMax);
       setPositiveSD(sDMax);
 
-      const sDMin = avarage - 1.5 * sD;
+      const sDMin = average - 1.5 * sD;
+      console.log('sdMin is:' + sDMin);
       setNegativeSD(sDMin);
     } catch (error) {
       console.log(error);
@@ -95,27 +99,56 @@ function DetailPage() {
     return;
   }
 
-  return (
-    <div>
-      <h1>{`${firstObg.name} vs ${secondObg.name}`}</h1>
-      <LineChart width={600} height={300} data={data}>
-        <CartesianGrid stroke="#ccc" />
-        <Line type="monotone" dataKey="value" stroke="#2196f3" />
-        <ReferenceLine
-          y={positiveSD}
-          label="standard deviation + 1.5"
-          stroke="#00FF00"
-        />
-        <ReferenceLine
-          y={negativeSD}
-          label="standard deviation - 1.5"
-          stroke="#FF0000"
-        />
+  function getSignal(array, positiveSD, negativeSD) {
+    if (array[array.length - 1].value >= positiveSD) {
+      return 'signal-buy';
+    } else if (array[array.length - 1].value <= negativeSD) {
+      return 'signal-sell';
+    } else {
+      return 'signal-neutral';
+    }
+  }
 
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-      </LineChart>
+  function getSecondSignal(array, positiveSD, negativeSD) {
+    if (array[array.length - 1].value >= positiveSD) {
+      return 'signal-sell';
+    } else if (array[array.length - 1].value <= negativeSD) {
+      return 'signal-buy';
+    } else {
+      return 'signal-neutral';
+    }
+  }
+
+  const signal = getSignal(data, positiveSD, negativeSD);
+  const secondBondSignal = getSecondSignal(data, positiveSD, negativeSD);
+
+  return (
+    <div className="detail-page">
+      <h1 className="detail-page__title">{`${firstObg.name} vs ${secondObg.name}`}</h1>
+      <div className="outcome-wrapper">
+        <LineChart width={600} height={300} data={data}>
+          <CartesianGrid stroke="#ccc" />
+          <Line type="monotone" dataKey="value" stroke="#2196f3" />
+          <ReferenceLine
+            y={positiveSD}
+            label="standard deviation + 1.5"
+            stroke="#00FF00"
+          />
+          <ReferenceLine
+            y={negativeSD}
+            label="standard deviation - 1.5"
+            stroke="#FF0000"
+          />
+
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+        </LineChart>
+        <div className="buy-sell-wrapper">
+          <h3 className={signal}>{firstObg.name}</h3>
+          <h3 className={secondBondSignal}>{secondObg.name}</h3>
+        </div>
+      </div>
     </div>
   );
 }

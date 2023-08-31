@@ -1,11 +1,41 @@
 .header {
-  background-color: red;
+  background-color: #000066;
 
   &-wrapper {
+    max-width: 1020px;
     color: greenyellow;
+    margin-left: auto;
+    margin-right: auto;
 
     &__title {
       font-family: 'Gruppo';
+      margin-top: 0;
+      padding-top: 1rem;
+      color: #cccccc;
+      font-size: 4rem;
+      margin-left: 3.5rem;
+    }
+  }
+
+  &-nav {
+    display: flex;
+    justify-content: space-between;
+
+    &-left-wrapper {
+    }
+    &__link {
+      color: #cccccc;
+      font-size: 1.8rem;
+
+      &--margin {
+        margin-right: 4rem;
+      }
+
+      &--special-margin {
+        margin-right: 8.5rem;
+        border-radius: 15px;
+        color: #ffa500;
+      }
     }
   }
 }

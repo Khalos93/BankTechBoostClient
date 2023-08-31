@@ -2,12 +2,12 @@ import './NavBar.scss';
 
 function NavBar() {
   return (
-    <div>
-      <section className="navBar">
-        <h4 className="navBar__item">name</h4>
-        <h4 className="navBar__item">level of subordination</h4>
-        <h4 className="navBar__item">spread level</h4>
-        <h4 className="navBar__item">daily change</h4>
+    <div className="navBar">
+      <section className="navBar-wrapper">
+        <h4 className="navBar-wrapper__item">name</h4>
+        <h4 className="navBar-wrapper__item">level of subordination</h4>
+        <h4 className="navBar-wrapper__item">spread level</h4>
+        <h4 className="navBar-wrapper__item">daily change</h4>
       </section>
     </div>
   );

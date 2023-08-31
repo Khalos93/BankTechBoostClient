@@ -1,0 +1,82 @@
+.detail-page {
+  &__title {
+    margin-top: 0;
+    padding-top: 2rem;
+  }
+}
+
+.outcome-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.signal {
+  &-buy {
+    background-color: #00ff00;
+    animation: blinkingBackground 1.5s infinite;
+  }
+
+  &-sell {
+    background-color: #ff0000;
+    animation: blinkingBackgroundSell 1.5s infinite;
+  }
+
+  &-neutral {
+    background-color: rgb(214, 196, 63);
+    animation: blinkingBackgroundNeutral 1.5s infinite;
+  }
+}
+
+@keyframes blinkingBackground {
+  0% {
+    background-color: #00ff00;
+  }
+  25% {
+    background-color: white;
+  }
+  50% {
+    background-color: #00ff00;
+  }
+  75% {
+    background-color: white;
+  }
+  100% {
+    background-color: #00ff00;
+  }
+}
+
+@keyframes blinkingBackgroundSell {
+  0% {
+    background-color: #ff0000;
+  }
+  25% {
+    background-color: white;
+  }
+  50% {
+    background-color: #ff0000;
+  }
+  75% {
+    background-color: white;
+  }
+  100% {
+    background-color: #ff0000;
+  }
+}
+
+@keyframes blinkingBackgroundNeutral {
+  0% {
+    background-color: rgb(214, 196, 63);
+  }
+  25% {
+    background-color: white;
+  }
+  50% {
+    background-color: rgb(214, 196, 63);
+  }
+  75% {
+    background-color: white;
+  }
+  100% {
+    background-color: rgb(214, 196, 63);
+  }
+}

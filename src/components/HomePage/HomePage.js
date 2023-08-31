@@ -32,10 +32,10 @@ function HomePage() {
 
   function clickSelectHandler(e, bondId) {
     if (!firstId && !secondId) {
-      setFirstId(e.target.id);
+      setFirstId(bondId);
       setSelecteFirstdArticle(bondId);
-    } else if (firstId && !secondId & (firstId !== e.target.id)) {
-      setSecondId(e.target.id);
+    } else if (firstId && !secondId && firstId !== e.target.id) {
+      setSecondId(bondId);
       setSelectSecondArticle(bondId);
     }
   }
@@ -56,49 +56,51 @@ function HomePage() {
     <div className={`hero `}>
       <NavBar />
       <Disclaimer />
-      {datas.map(bond => {
-        return (
-          <article
-            key={bond.id}
-            className={`bond ${
-              selecteFirstdArticle === bond.id
-                ? 'bond--selected'
-                : 'bond--not-selected'
-            } ${
-              selecteFirstdArticle && selectSecondArticle === bond.id
-                ? 'bond--second-selection'
-                : 'bond--not-selected'
-            }`}
-            id={bond.id}
-            onClick={e => {
-              clickSelectHandler(e, bond.id);
-            }}
-          >
-            <h3 className="bond__title obligation--detail">{bond.name}</h3>
-            <p className="bond__status obligation--detail">{bond.status}</p>
-            <p className="bond__price obligation--detail">
-              {bond.value[bond.value.length - 1].value}
-            </p>
+      <div className="hero-wrapper">
+        {datas.map(bond => {
+          return (
+            <article
+              key={bond.id}
+              className={`bond ${
+                selecteFirstdArticle === bond.id
+                  ? 'bond--selected'
+                  : 'bond--not-selected'
+              } ${
+                selecteFirstdArticle && selectSecondArticle === bond.id
+                  ? 'bond--second-selection'
+                  : 'bond--not-selected'
+              }`}
+              id={bond.id}
+              onClick={e => {
+                clickSelectHandler(e, bond.id);
+              }}
+            >
+              <h3 className="bond__title obligation--detail">{bond.name}</h3>
+              <p className="bond__status obligation--detail">{bond.status}</p>
+              <p className="bond__price obligation--detail">
+                {bond.value[bond.value.length - 1].value}
+              </p>
 
-            <p>
-              {(
-                bond.value[bond.value.length - 1].value -
-                bond.value[bond.value.length - 2].value
-              ).toFixed(2)}
-            </p>
-          </article>
-        );
-      })}
-      <div className="button-wrapper">
-        <button className="button" onClick={resetState}>
-          cancel
-        </button>
-        <Link
-          to={`/detail/${firstId}/${secondId}`}
-          className="button button--link"
-        >
-          submit
-        </Link>
+              <p>
+                {(
+                  bond.value[bond.value.length - 1].value -
+                  bond.value[bond.value.length - 2].value
+                ).toFixed(2)}
+              </p>
+            </article>
+          );
+        })}
+        <div className="button-wrapper">
+          <button className="button" onClick={resetState}>
+            cancel
+          </button>
+          <Link
+            to={`/detail/${firstId}/${secondId}`}
+            className="button button--link"
+          >
+            submit
+          </Link>
+        </div>
       </div>
     </div>
   );

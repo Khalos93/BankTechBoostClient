@@ -1,13 +1,21 @@
 import { Link } from 'react-router-dom';
 import './Disclaimer.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function Disclaimer() {
   const [display, setDispaly] = useState('block');
 
   function closeHandler() {
+    localStorage.setItem('disclaimerAccepted', true);
     setDispaly('none');
   }
+
+  useEffect(() => {
+    const hasDisclaimerAccepted = localStorage.getItem('disclaimerAccepted');
+    if (hasDisclaimerAccepted) {
+      setDispaly('none');
+    }
+  }, []);
 
   const today = new Date();
   const yyyy = today.getFullYear();

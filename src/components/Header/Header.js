@@ -10,8 +10,22 @@ function Header() {
         </Link>
 
         <nav className="header-nav">
-          <Link to="/about">About</Link>
-          <Link to="/">HomePage</Link>
+          <ul className="header-nav-left-wrapper">
+            <Link
+              className="header-nav__link header-nav__link--margin"
+              to="/about"
+            >
+              About
+            </Link>
+            <Link className="header-nav__link" to="/">
+              HomePage
+            </Link>
+          </ul>
+          <ul className="header-nav-right-wrapper">
+            <Link className="header-nav__link header-nav__link--special-margin">
+              Log In / Sign Up
+            </Link>
+          </ul>
         </nav>
       </div>
     </header>
