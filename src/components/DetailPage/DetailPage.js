@@ -79,6 +79,24 @@ function DetailPage() {
     setIsLoading(false);
   }, []);
 
+  function calculateGraphLow(array) {
+    let low = array[0].value;
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].value < low) low = array[i].value;
+    }
+    const graphLow = low - low * 0.1;
+    return graphLow;
+  }
+
+  function calculateGraphHigh(array) {
+    let max = array[0].value;
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].value > max) max = array[i].value;
+    }
+    const graphHigh = max + max * 0.01;
+    return graphHigh;
+  }
+
   function getStandardDeviation(array) {
     const n = array.length;
 
@@ -119,14 +137,26 @@ function DetailPage() {
     }
   }
 
+  const graphHighPoint = calculateGraphHigh(data).toFixed(0);
+  const graphLowPoint = calculateGraphLow(data).toFixed(0);
+
   const signal = getSignal(data, positiveSD, negativeSD);
   const secondBondSignal = getSecondSignal(data, positiveSD, negativeSD);
+
+  const newData = data.map(el => {
+    return {
+      date: el.date,
+      value: parseFloat(el.value.toFixed(4))
+    };
+  });
+
+  console.log(newData);
 
   return (
     <div className="detail-page">
       <h1 className="detail-page__title">{`${firstObg.name} vs ${secondObg.name}`}</h1>
       <div className="outcome-wrapper">
-        <LineChart width={600} height={300} data={data}>
+        <LineChart width={600} height={300} data={newData}>
           <CartesianGrid stroke="#ccc" />
           <Line type="monotone" dataKey="value" stroke="#2196f3" />
           <ReferenceLine
@@ -141,7 +171,11 @@ function DetailPage() {
           />
 
           <XAxis dataKey="date" />
-          <YAxis />
+          <YAxis
+            domain={[graphLowPoint, graphHighPoint]}
+            padding={{ top: 20, bottom: 20 }}
+            dataKey={'value'}
+          />
           <Tooltip />
         </LineChart>
         <div className="buy-sell-wrapper">
