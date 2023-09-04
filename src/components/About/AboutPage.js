@@ -60,9 +60,9 @@ function AboutPage() {
         <ol className="section__list">
           <li className="section__item">
             <strong className="section__item-title">Data Input:</strong> You
-            provide data for the two bonds you want to analyze. This data
-            typically includes bond identifiers, historical pricing data, and
-            other relevant information.
+            select the two bonds you want to analyze. This data typically
+            includes bond identifiers, historical pricing data, and other
+            relevant information.
           </li>
           <li className="section__item">
             <strong className="section__item-title">Ratio Calculation:</strong>{' '}
