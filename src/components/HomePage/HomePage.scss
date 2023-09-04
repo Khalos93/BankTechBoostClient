@@ -1,8 +1,10 @@
 .hero {
+  background-color: aliceblue;
   .hero-wrapper {
     max-width: 1020px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 3rem;
   }
 }
 
@@ -12,28 +14,43 @@
   width: 80%;
   height: 5rem;
   margin: 1rem 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: bisque;
+  border-radius: 40px;
+
+  margin-bottom: 3rem;
 
   &__title {
+    width: 30rem;
+    margin-top: 1.5rem;
   }
 
   &__status {
+    width: 15rem;
   }
 
   &__price {
+    width: 7rem;
   }
 
   .obligation--detail {
-    width: 4rem;
     height: 3rem;
+  }
+
+  &:hover {
+    box-shadow: 1px 1px 5px 5px #f5a97a;
   }
 }
 
 .button-wrapper {
   display: flex;
+  justify-content: space-between;
   width: 25%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 3rem;
+  padding-bottom: 3rem;
 
   .button {
     width: 10rem;

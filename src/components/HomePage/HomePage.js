@@ -18,6 +18,8 @@ function HomePage() {
   const [selecteFirstdArticle, setSelecteFirstdArticle] = useState(null);
   const [selectSecondArticle, setSelectSecondArticle] = useState(null);
 
+  const [clickable, setClickable] = useState(false);
+
   useEffect(() => {
     axios
       .get(`${DOMAIN}${PORT}`)
@@ -37,6 +39,7 @@ function HomePage() {
     } else if (firstId && !secondId && firstId !== e.target.id) {
       setSecondId(bondId);
       setSelectSecondArticle(bondId);
+      setClickable(true);
     }
   }
 
@@ -46,6 +49,7 @@ function HomePage() {
 
     setSelecteFirstdArticle(null);
     setSelectSecondArticle(null);
+    setClickable(false);
   }
 
   if (isLoading) {
@@ -81,7 +85,7 @@ function HomePage() {
                 {bond.value[bond.value.length - 1].value}
               </p>
 
-              <p>
+              <p className="bond__daily-change obligation--detail">
                 {(
                   bond.value[bond.value.length - 1].value -
                   bond.value[bond.value.length - 2].value
@@ -95,6 +99,7 @@ function HomePage() {
             cancel
           </button>
           <Link
+            style={{ pointerEvents: clickable ? '' : 'none' }}
             to={`/detail/${firstId}/${secondId}`}
             className="button button--link"
           >

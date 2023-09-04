@@ -50,6 +50,7 @@ function DetailPage() {
 
         const ratio = {
           date: formattedDate,
+
           value: spreadValue1[i].value / spreadValue2[i].value
         };
 
@@ -60,14 +61,13 @@ function DetailPage() {
       const average = ratios.reduce((a, b) => a + b.value, 0) / ratios.length;
 
       const sD = getStandardDeviation(ratios);
-      console.log('sd is:' + sD);
 
       const sDMax = average + 1.5 * sD;
-      console.log('sdMax is:' + sDMax);
+
       setPositiveSD(sDMax);
 
       const sDMin = average - 1.5 * sD;
-      console.log('sdMin is:' + sDMin);
+
       setNegativeSD(sDMin);
     } catch (error) {
       console.log(error);

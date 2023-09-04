@@ -1,0 +1,45 @@
+.section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.section__title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.section__content {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.section__list {
+  list-style: none;
+  padding-left: 20px;
+}
+
+.section__item {
+  margin-bottom: 10px;
+}
+
+.section__item-title {
+  font-weight: bold;
+}
+
+.section:last-child {
+  background-color: #f0f0f0;
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+a {
+  color: #0074d9;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #0056b3;
+}

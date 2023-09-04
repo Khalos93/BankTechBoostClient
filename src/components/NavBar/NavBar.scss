@@ -8,8 +8,22 @@
     margin-right: auto;
 
     &__item {
-      width: 4rem;
       height: 3rem;
+
+      &--name {
+        width: 30rem;
+      }
+
+      &--subordination {
+        width: 15rem;
+      }
+
+      &--spread {
+        width: 7rem;
+      }
+      &--daily {
+        width: 3rem;
+      }
     }
   }
 }
