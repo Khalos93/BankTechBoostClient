@@ -86,9 +86,13 @@ function Disclaimer() {
         </p>
         <p>{`Last updated: ${formattedToday}`} </p>
       </section>
-      <div>
-        <Link>Leave</Link>
-        <button onClick={closeHandler}>Accept</button>
+      <div className="button-to-flex">
+        <Link to={'/about'} className="button">
+          Leave
+        </Link>
+        <button className="button--link" onClick={closeHandler}>
+          Accept
+        </button>
       </div>
     </article>
   );
