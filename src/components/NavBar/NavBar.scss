@@ -1,9 +1,10 @@
 .navBar {
   background-color: #dad4ef;
   &-wrapper {
+    max-width: 1020px;
     display: flex;
     justify-content: space-around;
-    width: 80%;
+    width: 58%;
     margin-left: auto;
     margin-right: auto;
 
@@ -19,10 +20,10 @@
       }
 
       &--spread {
-        width: 7rem;
+        width: 6rem;
       }
       &--daily {
-        width: 3rem;
+        width: 5rem;
       }
     }
   }

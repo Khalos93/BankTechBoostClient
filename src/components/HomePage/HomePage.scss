@@ -56,8 +56,13 @@
     width: 10rem;
     height: 4rem;
     border-radius: 20px;
+    background-color: white;
+    border-color: #0b66c2;
+    color: #0b66c2;
 
     &--link {
+      background-color: #0b66c2;
+      color: white;
       border: 1px solid;
       padding-left: 7%;
       padding-top: 3%;
